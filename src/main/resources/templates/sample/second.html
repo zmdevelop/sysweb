@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Insert title here</title>
+</head>
+<body>
+This is second page
+	<br />姓名：<span th:text="${name}" /> 
+	<br />
+	爱好：
+	<div th:each="hobby : ${hobbies}">
+		<div th:text="${hobby}">
+		</div>
+	</div>
+</body>
+</html>

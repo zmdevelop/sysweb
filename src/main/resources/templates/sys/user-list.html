@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>蓝海软件管理系统</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/themes_sb/bower_components/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet" />
+
+    <!-- MetisMenu CSS -->
+    <link th:href="@{/themes_sb/bower_components/metisMenu/dist/metisMenu.min.css}" rel="stylesheet" />
+
+    <!-- DataTables CSS -->
+    <link th:href="@{/themes_sb/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css}" rel="stylesheet" />
+
+    <!-- DataTables Responsive CSS -->
+    <link th:href="@{/themes_sb/bower_components/datatables-responsive/css/dataTables.responsive.css}" rel="stylesheet" />
+    
+    <!-- Custom CSS -->
+    <link th:href="@{/themes_sb/dist/css/sb-admin-2.css}" rel="stylesheet" />
+
+    <!-- Custom Fonts -->
+    <link th:href="@{/themes_sb/bower_components/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	<div class="modal fade" id="usermodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title">用户信息项</h4>
+				</div>
+				<div class="modal-body">
+					<form role="form" name="addUserForm" id="addUserForm" method="post">
+						<input type="hidden" name="userId" id="userId"/>
+						<input type="hidden" name="flag" id="flag"/>
+						<input type="hidden" name="password" id="password"/>
+						<input type="hidden" name="state" id="state"/>
+						<input type="hidden" name="password" id="password"/>
+		      			<div class="container-fluid">
+		      				<div class="form-group">
+							    <label style="color: red;">*</label>登录名称：<input type="text" id="loginName2" name="loginName"  class="form-control"/>
+							</div>
+							<div class="form-group">
+							    <label style="color: red;">*</label>密  码：<input type="text" id="loginName2" name="loginName"  class="form-control"/>
+							</div>
+							<div class="form-group">
+							    <label style="color: red;">*</label>真实名称：<input type="text" id="userName2" name="userName" class="form-control"/>
+						   </div>
+							<div class="form-group">
+							    <label style="color: red;">*</label>邮件地址：<input type="text" id="email2" name="email"  class="form-control"/>
+							</div>
+							<div class="form-group">
+							    <label style="color: red;">*</label>手机号码：<input type="text" id="phoneNum2" name="phoneNum"  class="form-control"/>
+							</div>
+							<div class="form-group">
+								备注：<textarea name="remark" id="remark2" class="form-control"></textarea>
+							</div>
+						</div>
+		      		</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" onclick="javascript:save();">保存</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div>
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">̫太极计算机股份有限公司</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>Read All Messages</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-messages -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-tasks">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 1</strong>
+                                        <span class="pull-right text-muted">40% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                            <span class="sr-only">40% Complete (success)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 2</strong>
+                                        <span class="pull-right text-muted">20% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                            <span class="sr-only">20% Complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 3</strong>
+                                        <span class="pull-right text-muted">60% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">60% Complete (warning)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 4</strong>
+                                        <span class="pull-right text-muted">80% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80% Complete (danger)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Tasks</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-tasks -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i> New Comment
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                    <span class="pull-right text-muted small">12 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-tasks fa-fw"></i> New Task
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Alerts</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-alerts -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a th:href="@{/login}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search..." />
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a th:href="@{/sysGover/log_list}"><i class="fa fa-dashboard fa-fw"></i>软件日志管理</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/SysDicClass/page}"><i class="fa fa-table fa-fw"></i>字典管理</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/sysGover/cachePage}"><i class="fa fa-edit fa-fw"></i>缓存管理</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>系统设置<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href = "">用户维护</a>
+                                </li>
+                                <li>
+                                    <a href="">角色维护</a>
+                                </li>
+                                <li>
+                                    <a href="">组织维护</a>
+                                </li>
+                            </ul>
+                       </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper">
+			<div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">用户维护</h1>
+                </div>
+            </div>
+            <form name="sysUserListForm" method="post" action="">
+            <!-- 当前页数-->
+			<input name="pagecurrentnum" id="pagecurrentnum" type="hidden" th:value="${pagevar.pageCurrentNum}" />
+			<!--页面总数  -->
+			<input name="pagecount" id="pagecount" type="hidden" th:value="${pagevar.pageCount}" />
+            <div class="row">
+            	<div class="col-lg-12">
+            		<div class="panel panel-default">
+            			<div class="panel-heading">
+            				DataTables
+            			</div>
+            			<div class="col-lg-12">
+	            			<div class="form-inline">
+	            				<button type="button" style="margin-top: 10px;margin-bottom: 10px;" class="btn btn-default" data-toggle="modal" data-target="#usermodal" onclick="show()">添加用户</button>
+	            			</div>
+	            		</div>
+<!--             			<div class="row">
+			             <div class="col-lg-12">
+			               <table class="form-inline">
+			               	<tbody>
+			               		<tr >
+			               			<td style="padding-left: 13px;padding-top: 8px;">登录名称：</td>
+			               			<td style="padding-top: 8px;"><input type="text" class="form-control input-sm" name="loginName" th:value="${dto.loginName}" placeholder="请输入字典代码"/></td>
+			               			<td style="padding-left: 13px;padding-top: 8px;">真是姓名：</td>
+			               			<td style="padding-top: 8px;"><input type="text" class="form-control input-sm" name="userName" th:value="${dto.userName}" placeholder="请输入字典代码"/></td>
+			               			<td style="padding-left: 13px;padding-top: 8px;">邮件地址：</td>
+			               			<td style="padding-top: 8px;"><input type="text" class="form-control input-sm" name="email" th:value="${dto.email}" placeholder="请输入字典代码"/></td>
+			               			<td style="padding-left: 13px;padding-top: 8px;"><input  class="ubtn btn-default" type="button" name="button" id=""  value="查询"  title="查询" onclick="javascript:searchUser();"/></td>
+			               		</tr>
+			               	</tbody>
+			              </table>
+			              </div>
+			            </div> -->
+            			<div class="panel-body">
+            				<div class="dataTable_wrapper">
+            					<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+            						<thead>
+                                        <tr>
+                                            <th style="width:50px;">序号</th>
+                                            <th>登录名称</th>
+                                            <th>真实姓名</th>
+                                            <th style="width:200px;">邮件地址</th>
+                                            <th>手机号码</th>
+<!--                                             <th>用户状态</th> -->
+                                            <th style="width:250px;">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    	<tr class="odd gradeX" th:each="user,expertstate:${userInfo}">
+                                    		<td th:text="(${pagevar.pageCurrentNum}-1)*${pagevar.pageSize}+${expertstate.count}"></td>
+											<td th:text="${user.loginName}"></td>
+											<td th:text="${user.userName}"></td>
+											<td th:text="${user.email}"></td>
+											<td class="center" th:text="${user.phoneNum}"></td>
+<!-- 											<td class="center" th:text="${user.state}"></td> -->
+											<td>
+<!-- 												 <button class="btn btn-default" th:onclick="'javascript:editUser(\'' + ${user.userId} + '\')'">编辑</button> -->
+												 <input type="button"  value="编辑" class="btn btn-default"  th:onclick="'javascript:editUser(\'' + ${user.userId} + '\')'"/>
+												 <button class="btn btn-default" onclick="">删除</button>
+											</td>
+                                    	</tr>
+                                    </tbody>
+            					</table>
+            				</div>
+            				<div class="row">
+            					<div class="col-sm-6">
+            						<div class="dataTables_info">
+									<span  th:inline="text"
+										th:text="'&nbsp;当前：&nbsp;'+|${pagevar.pageCurrentNum}/${pagevar.pageCount}|+'&nbsp;页&nbsp; 共&nbsp;'+|${pagevar.pageTotal}&nbsp;条记录|"></span>
+									<span>显示条数 
+										<select name="pagesize" id="pagesize" class="select-page" onchange="javascript:search();">
+											<option value="10" th:selected="${pagevar.pageSize}==10 and ${pagevar.pageSize==null}">10</option>
+											<option value="15" th:selected="${pagevar.pageSize}==15">15</option>
+											<option value="20" th:selected="${pagevar.pageSize}==20">20</option>
+											<option value="30" th:selected="${pagevar.pageSize}==30">30</option>
+											<option value="40" th:selected="${pagevar.pageSize}==40">40</option>
+											<option value="50" th:selected="${pagevar.pageSize}==50">50</option>
+										</select> 
+									</span>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="dataTables_paginate paging_simple_numbers"> 
+									<span class="ui-page-item ui-item-link"> 
+										<a href="javascript:void(0)" onclick="javascript:turnTo('first')" class="ui-page-item ui-page-item-first">首页</a> 
+										<a href="javascript:void(0)" onclick="javascript:turnTo('prev')" class="ui-page-item ui-page-item-prev">上一页</a> 
+										<a href="javascript:void(0)" onclick="javascript:turnTo('next')" class="ui-page-item ui-page-next">下一页</a>
+										<a href="javascript:void(0)" onclick="javascript:turnTo('last')" class="ui-page-item ui-page-last">尾页</a>
+									</span>
+									<span class="ui-page-item ui-page-item-go">转到
+									<input name="page" id="page" type="text" value="" style="width: 40px;" class="input-page" />
+									<a href="javascript:turnTo();" class="ui-button ui-button-go">Go</a> 
+									</span>
+									</div> 
+								</div>
+							</div>
+            			</div>
+            		</div>
+            	</div>
+            </div>
+            </form>
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script type="text/javascript" th:src="@{/themes_sb/bower_components/jquery/dist/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/themes_sb/bower_components/bootstrap/js/transition.js}"></script>
+    <script type="text/javascript" th:src="@{/themes_sb/bower_components/bootstrap/js/modal.js}"></script>
+
+<!--     Bootstrap Core JavaScript -->
+    <script type="text/javascript"  th:src="@{/themes_sb/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+
+<!--     Metis Menu Plugin JavaScript -->
+    <script type="text/javascript"  th:src="@{/themes_sb/bower_components/metisMenu/dist/metisMenu.min.js}"></script>
+
+   <!-- DataTables JavaScript -->
+    <script type="text/javascript" th:src="@{/themes_sb/bower_components/datatables/media/js/jquery.dataTables.min.js}"></script>
+    <script type="text/javascript" th:src="@{/themes_sb/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js}"></script>
+
+<!--     Custom Theme JavaScript -->
+    <script type="text/javascript" th:src="@{/themes_sb/dist/js/sb-admin-2.js}"></script>
+     <script type="text/javascript" src="/sys/js/sys.js"></script>
+    <script type="text/javascript">
+    /*<![CDATA[*/
+               
+                 $(document).ready(function(){
+            	   initMenus();
+               });
+	  	 function turnTo(flagPage){
+			 var pagecurrentnum = document.getElementById("pagecurrentnum").value;
+			 var pagecount = document.getElementById("pagecount").value;
+			 var turnToPage = document.getElementById("page").value;
+			 if(flagPage == "prev"){
+				 if(pagecurrentnum == 1){
+						alert("已经是第一页");
+						return ;
+				 }
+				 pagecurrentnum = parseInt(pagecurrentnum) -1;
+			 }else if(flagPage == "next"){
+				 if(parseInt(pagecurrentnum) >= parseInt(pagecount)){
+						alert("已经是最后一页");
+						return ;
+				 }
+				 pagecurrentnum = parseInt(pagecurrentnum) + 1;
+			 }else if(flagPage == "first"){
+				 if(pagecurrentnum == 1){
+						alert("已经是第一页");
+						return ;
+				 }
+				 pagecurrentnum = 1;
+			 }else if(flagPage == "last"){
+				 if(parseInt(pagecurrentnum) >= parseInt(pagecount)){
+						alert("已经是最后一页");
+						return ;
+				 }
+				 pagecurrentnum = pagecount;
+			 }else{
+				 if(turnToPage == ""){
+					alert("请输入要跳转页面的页数");
+					document.getElementById("page").focus();
+					return;
+				 }
+				 var arr1 = new RegExp("^[0-9]*$");
+				 if(!arr1.exec(turnToPage)){
+					 alert("输入内容非法，请输入正确数字");
+					 document.getElementById("page").value = "";
+					 document.getElementById("page").focus();
+					 return;
+				 }
+				 if(parseInt(turnToPage) > parseInt(pagecount) || 1 > parseInt(turnToPage)){
+					 alert("输入页数超出范围，请出新输入");
+					 document.getElementById("page").value = "";
+					 document.getElementById("page").focus();
+					 return;
+				 }
+				 pagecurrentnum = turnToPage;
+			 }
+			 document.getElementById("pagecurrentnum").value = pagecurrentnum;
+			 sysUserListForm.action = "/sysGover/sys/user-list";
+			 sysUserListForm.submit();
+		}
+		
+		function search(){
+			sysUserListForm.action = "/sysGover/sys/user-list";
+			sysUserListForm.submit();
+		}
+		  
+		  function searchUser(){
+// 			  document.getElementById("pagecurrentnum").value="1";
+			  sysUserListForm.action = "/sysGover/sys/user-list";
+			 
+			  sysUserListForm.submit();
+		  }
+		  
+		  
+		
+		  
+		function show(){
+			clearField();
+		 	$("#usermodal").modal("toggle");
+		}
+		
+		function save(){
+			alert("确定提交？");
+			//验证通过
+			$.ajax({
+	            type: "post",
+	            url: "./user-add.json",
+	            data: $("#addUserForm").serialize(),
+	            success: function (data) {
+	            	alert("保存成功");
+	            	$("#usermodal").modal('hide');
+	            	location.reload(true);
+	            },
+	            error: function (data) {
+	                alert("异步提交表单错误.");
+	            }
+	        });
+		}
+		
+		function editUser(userId){
+			$.ajax({
+	            type: "post",
+	            url: "./user-edit.json",
+	            data: "userId="+userId,
+	            dataType: "json",
+	            success: function (data) {
+	            	$("#loginName2").val(data.loginName);
+	            	$("#loginName2").attr("readonly", "readonly");
+	            	$("#userName2").val(data.userName);
+	            	$("#email2").val(data.email);
+	            	$("#phoneNum2").val(data.phoneNum);
+	            	$("#remark2").val(data.remark);
+	            	$("#userId").val(data.userId);
+	            	$("#flag").val(data.flag);
+	            	$("#password").val(data.password);
+	            	$("#state").val(data.state);
+	            	
+	            	$("#usermodal").modal('show');
+	            	//location.reload(true);
+	            },
+	            error: function (data) {
+	                alert("请求失败");
+	            }
+	        });
+		}
+		
+		
+	 	function clearField(){
+	 		$("#loginName2").val("");
+	 		$("#userName2").val("");
+	 		$("#email2").val("");
+	 		$("#phoneNum2").val("");
+	 		$("#remark2").val("");
+	 		$("#userId").val("");
+        	$("#flag").val("");
+        	$("#password").val("");
+        	$("#state").val("");
+	 	}
+		  
+	/*]]>*/ 	
+    </script>
+
+	
+</body>
+
+</html>

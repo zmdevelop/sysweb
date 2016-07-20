@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Forth sample</title>
+<link rel="stylesheet" th:href="@{/webjars/jquery-ui/1.10.4/themes/base/jquery-ui.css}"/>
+<style type="text/css">
+.error {color:#ff0000;
+font-style:italic;}
+</style>
+<script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/jquery-ui/1.10.4/ui/minified/jquery-ui.min.js}"></script>
+<script th:src="@{/webjars/jquery-ui/1.10.4/ui/minified/i18n/jquery-ui-i18n.min.js}"></script>
+<script th:inline="javascript">
+  $(function() {
+    $( "#birthInput" ).datepicker( $.datepicker.regional[ "zh-CN" ] );
+//     $( "#birthInput2" ).datepicker( $.datepicker.regional[ "zh-CN" ] );
+   });
+  </script>
+</head>
+<body>
+<h1 th:text="${message}"></h1>
+	<form th:object="${dto}" th:action="@{/sample/forth}" method="post">
+		<label for="nameInput">Name: </label>
+		<input th:field="*{name}" id="nameInput" th:value="${dto.name}"></input>
+		<br />
+		<label for="birthInput">Birth: </label>
+		<input th:field="*{birth}" id="birthInput" th:value="${dto.birth}"></input>
+		<br />
+		<label for="weightInput">Weight: </label>
+		<input th:field="*{weight}" id="weightInput" th:value="${dto.weight}"></input>
+		<div th:errors="${dto.weight}" style="color: red;"></div>
+		<br />
+		<input type="submit" th:value="Submit" />
+	</form>
+	<br />
+	<br />
+<!-- 	<form action="" method="post"> -->
+<!-- 		<input type="text" name="name" th:value="${dto.name}" /> <br /> -->
+<!-- 		<fmt:formatDate value="${dto.birth}" type="date" pattern="yyyy-MM-dd" -->
+<!-- 			var="theFormattedDate" /> -->
+<!-- 		<input type="text" name="birth" id ="birthInput2" th:value="${theFormattedDate}" /> <br /> -->
+<!-- 		<input type="submit" th:text="Submit"></input> -->
+<!-- 		<button type="submit" th:text="Submit"></button> -->
+<!-- 	</form> -->
+</body>
+</html>

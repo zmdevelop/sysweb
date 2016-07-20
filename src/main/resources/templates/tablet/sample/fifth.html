@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>submit json with CSRF data</title>
+<script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+<meta name="_csrf_parameter" th:content="${_csrf.parameterName}"
+	th:if="${_csrf}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}"
+	th:if="${_csrf}" />
+<meta name="_csrf" th:content="${_csrf.token}" th:if="${_csrf}" />
+<script>
+	$(function() {
+		var csrfParameter = $("meta[name='_csrf_parameter']").attr("content");
+		var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+		var csrfToken = $("meta[name='_csrf']").attr("content");
+		var json = {
+			'name' : 'Daniel'
+		};
+		if (csrfParameter) {
+			json[csrfParameter] = csrfToken;
+//			alert(json['_csrf']);
+		}
+		$.ajax({
+			url : "fifth.json",
+			type : "POST",
+			data : json, // {'name': "Daniel", csrfParameter: csrfToken },
+			success : function(data, textStatus, jqXHR) {
+				alert("success with data.status : " + data.status);
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				alert("error " + errorThrown)
+			}
+		});
+	});
+</script>
+</head>
+<body>
+</body>
+</html>

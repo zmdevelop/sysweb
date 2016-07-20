@@ -1,0 +1,36 @@
+<div class="modal fade" id="usermodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">用户信息项</h4>
+			</div>
+			<div class="modal-body">
+				<form role="form" name="addUserForm" id="addUserForm" method="post">
+					<input type="hidden" name="ctType" id="ctType"/>
+	      			<div class="container-fluid">
+	      				<div class="form-group">
+						    <label style="color: red;">*</label>登录名称：<input type="text" id="loginName2" name="loginName"  class="form-control"/>
+						</div>
+						<div class="form-group">
+						    <label style="color: red;">*</label>真实名称：<input type="text" id="userName2" name="userName" class="form-control"/>
+					   </div>
+						<div class="form-group">
+						    <label style="color: red;">*</label>邮件地址：<input type="text" id="email2" name="email"  class="form-control"/>
+						</div>
+						<div class="form-group">
+						    <label style="color: red;">*</label>手机号码：<input type="text" id="phoneNum2" name="phoneNum"  class="form-control"/>
+						</div>
+						<div class="form-group">
+							备注：<textarea name="remark" id="remark2" class="form-control"></textarea>
+						</div>
+					</div>
+	      		</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" onclick="javascript:save();">保存</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div>

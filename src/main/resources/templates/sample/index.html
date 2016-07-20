@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Index</title>
+
+<link rel="stylesheet"
+	href="webjars/jqwidgets/3.5.0/styles/jqx.base.css"
+	th:href="@{/webjars/jqwidgets/3.5.0/styles/jqx.base.css}"
+	type="text/css" />
+<link rel="stylesheet"
+	href="webjars/jqwidgets/3.5.0/styles/jqx.darkblue.css"
+	th:href="@{/webjars/jqwidgets/3.5.0/styles/jqx.darkblue.css}"
+	type="text/css" />
+<link rel="stylesheet"
+	href="webjars/jqwidgets/3.5.0/styles/jqx.darkblue.css"
+	th:href="@{/webjars/jqwidgets/3.5.0/styles/jqx.bootstrap.css}"
+	type="text/css" />
+
+<script type="text/javascript"
+	th:src="@{/webjars/jquery/1.11.1/jquery.min.js}" />
+
+<script type="text/javascript" src="webjars/jqwidgets/3.5.0/jqxcore.js"
+	th:src="@{/webjars/jqwidgets/3.5.0/jqxcore.js}" />
+<script type="text/javascript"
+	src="webjars/jqwidgets/3.5.0/jqxdatetimeinput.js"
+	th:src="@{/webjars/jqwidgets/3.5.0/jqxdatetimeinput.js}" />
+<script type="text/javascript"
+	src="webjars/jqwidgets/3.5.0/jqxcalendar.js"
+	th:src="@{/webjars/jqwidgets/3.5.0/jqxcalendar.js}" />
+<script type="text/javascript"
+	src="webjars/jqwidgets/3.5.0/jqxtooltip.js"
+	th:src="@{/webjars/jqwidgets/3.5.0/jqxtooltip.js}" />
+<script type="text/javascript"
+	src="webjars/jqwidgets/3.5.0/jqxbuttons.js"
+	th:src="@{/webjars/jqwidgets/3.5.0/jqxbuttons.js}" />
+<script type="text/javascript"
+	src="webjars/jqwidgets/3.5.0/globalization/globalize.js"
+	th:src="@{/webjars/jqwidgets/3.5.0/globalization/globalize.js}" />
+<script type="text/javascript"
+	src="webjars/jqwidgets/3.5.0/globalization/globalize.culture.zh-CN.js"
+	th:src="@{/webjars/jqwidgets/3.5.0/globalization/globalize.culture.zh-CN.js}" />
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+	$(document).ready(function() {
+		$("#jqxWidget").jqxCalendar({
+			enableTooltips: true,
+			theme : 'darkblue',
+			width : '400px',
+			height : '220px', 
+			showWeekNumbers: true,
+			enableWeekend: true,
+			dayNameFormat : 'default'
+		});
+		$("#jqxWidget").jqxCalendar({
+			culture : /*[[${locale}]]*/'en-US'
+		});
+	});
+	/*]]>*/
+</script>
+
+</head>
+<body class='default'>
+<div id='content'>
+        <div id='jqxWidget'>
+        </div>
+    </div>
+<div th:text="${locale}"></div>
+<br/>
+<div style='float:left;' id='jqxWidget'>
+<div style='float: left; margin-right: 20px;' id='jqxCalendar'></div>
+</div>
+<br/>
+<h1 th:text="${message}"></h1>
+<a th:href="@{/sample/first.html}">01. first</a><br/>
+<a th:href="@{/sample/second.html}">02. Second Page to show value</a><br/>
+<a th:href="@{/sample/third.html?name=YourName}">03. third?name=YourName</a><br/>
+<a th:href="@{/sample/forth.html}">04. Form submit</a><br/>
+<a th:href="@{/sample/fifth.html}">05. JSON submit</a><br/>
+<a th:href="@{/sample/sixth.html}">06. JSON submit as String</a><br/>
+<a th:href="@{/sample/upload.html}">File Upload</a><br/>
+<a th:href="@{/sample/download1.html}">Download 1</a><br/>
+<a th:href="@{/sample/download2.html}">Download 2</a><br/>
+<img alt="图片" th:src="@{/img/qzh.jpg}" width="350" height="500"/>
+</body>
+</html>

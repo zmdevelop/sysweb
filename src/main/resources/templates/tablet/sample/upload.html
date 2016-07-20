@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Upload File</title>
+<script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+</head>
+<body>
+	<form action="" method="post" enctype="multipart/form-data">
+		<input name="name" />
+		<br/>
+		Please select a file to upload : <input type="file" name="file" />
+		<input type="file" name="file" />
+		<input type="submit" value="upload" /><br/>
+				<input type="hidden"
+					th:name="${_csrf.parameterName}" th:value="${_csrf.token}" th:if="${_csrf}" />
+		
+		<span><form:errors path="file" cssClass="error" />
+		</span>
+	</form>
+</body>
+</html>
