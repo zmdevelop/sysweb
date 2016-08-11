@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>爬虫管理 </title>
+
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/themes_sb/bower_components/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet"></link>
+
+    <!-- MetisMenu CSS -->
+    <link th:href="@{/themes_sb/bower_components/metisMenu/dist/metisMenu.min.css}" rel="stylesheet"></link>
+
+    <!-- DataTables CSS -->
+    <link th:href="@{/themes_sb/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css}" rel="stylesheet"></link>
+
+    <!-- DataTables Responsive CSS -->
+    <link th:href="@{/themes_sb/bower_components/datatables-responsive/css/responsive.dataTables.scss}" rel="stylesheet"></link>
+
+    <link rel="stylesheet" href="/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css"></link>
+   
+    <!-- Custom CSS -->
+    <link th:href="@{/themes_sb/dist/css/sb-admin-2.css}" rel="stylesheet"></link>
+
+    <!-- Custom Fonts -->
+    <link th:href="@{/themes_sb/bower_components/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css"></link>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- jQuery -->
+    <script type="text/javascript" th:src="@{/themes_sb/bower_components/jquery/dist/jquery.min.js}"></script>
+    <!-- <script th:src="@{/themes_sb/sysDicClass/page.js}" type="text/javascript"></script> -->
+    <!-- Bootstrap Core JavaScript -->
+    <script type="text/javascript" th:src="@{/themes_sb/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script type="text/javascript" th:src="@{/themes_sb/bower_components/metisMenu/dist/metisMenu.min.js}"></script>
+
+    <!-- DataTables JavaScript -->
+    <script type="text/javascript" th:src="@{/themes_sb/bower_components/datatables/media/js/jquery.dataTables.min.js}"></script>
+    <script type="text/javascript" th:src="@{/themes_sb/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script th:src="@{/themes_sb/dist/js/sb-admin-2.js}" type="text/javascript"></script>
+    
+     <script type="text/javascript" src="/ztree/js/jquery.ztree.core.js"></script>
+     <script type="text/javascript" src="/ztree/js/jquery.ztree.excheck.js"></script>
+      <script type="text/javascript" src="/sys/js/sys.js"></script>
+    
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">爬虫管理系统</a>
+            </div>
+             <ul class="nav navbar-top-links navbar-right">
+               
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i>用户信息</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i>设置</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i>退出</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                  
+                    <!--/.菜单生成  -->
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper">
+            
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">爬虫管理</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+            </div>
+            <div class="form-group">
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default" id="listPage">
+                       
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+    <!-- field 弹窗 start-->
+    	<div class="modal fade" id="fieldModal" tabindex="-1" role="dialog" aria-labelledby="fieldModalLabel" aria-hidden="true">
+					   <div class="modal-dialog">
+					      <div class="modal-content">
+					         <div class="modal-header">
+					            <button type="button" class="close" 
+					               data-dismiss="modal" aria-hidden="true">
+					                  &times;
+					            </button>
+           					    <h4 class="modal-title" id="myModalLabel">过滤设置</h4>
+  							</div>
+        				   <div class="modal-body">
+           						<form role="form" name="addsForm" id="addsForm" method="post">
+           							<div class="container-fluid">
+           							    <div class="form-group">
+										    <label style="color: red;">*</label><label style="color: red;">*</label>字段名称：<input type="text" id="name" name="name" class="form-control"/>
+										    <input type="hidden" name="id"/>
+										    <input type="hidden" name="spiderChannelId" id="formFieldChannelId"/>
+										    <input type="hidden" name="filterType" value="script"/>
+										    <input type="hidden" name="modelId"/>
+										</div>
+										<div class="form-group">
+										          <label style="color: red;">*</label>  元素(xpath):<input type="text" id="xpath" name="xpath" class="form-control"/>
+										 </div>
+										 <div class="form-group">
+										            属性:<input type="text" id="attr" name="attr" class="form-control"/>
+										 </div>
+										 <div class="form-group">
+										            处理代码:<input type="text" id="filterValue" name="filterValue" class="form-control"/>
+										 </div>
+									</div>
+									<div class="form-group">
+										<div class="col-md-4">
+										    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+											<button type="button"  value="保 存"  class="btn" onclick="saveField()">保存</button>
+									    </div>
+									</div>
+									<br/>
+           						</form>
+        				   </div>
+				      </div><!-- /.modal-content -->
+				</div><!-- /.modal -->
+			</div>
+    <!-- field弹窗end -->
+<!--弹框开始-->
+               	  	 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					   <div class="modal-dialog">
+					      <div class="modal-content">
+					         <div class="modal-header">
+					            <button type="button" class="close" 
+					               data-dismiss="modal" aria-hidden="true">
+					                  &times;
+					            </button>
+           					    <h4 class="modal-title" id="myModalLabel">内容设置</h4>
+  							</div>
+        				   <div class="modal-body">
+           						<form role="form" name="addsForm" id="addsForm" method="post">
+           							<div class="container-fluid">
+           							    <div class="form-group">
+										    <label style="color: red;">*</label>名称：<input type="text" id="name" name="name" class="form-control"/>
+										    <input type="hidden" name="id"/>
+										    <input type="hidden" name="contentType" value="0"/>
+										</div>
+										<div class="form-group">
+										          所属站点：<select name="spiderSiteId" id ="spiderSiteId" class="form-control">
+										             <option th:each="site,iterStat:${siteDtos}"  th:value="${site.id}" th:text= "${site.name}"></option>
+										          </select>
+										</div>
+										<div class="form-group">
+										    <label style="color: red;">*</label>url匹配规则:<input type="text" id="url" name="url" class="form-control"/>
+										 </div>
+										 <div class="form-group">
+										          <label style="color: red;">*</label>  标题xpath:<input type="text" id="title" name="title" class="form-control"/>
+										 </div>
+										 <div class="form-group">
+										            副标题xpath:<input type="text" id="subTitle" name="subTitle" class="form-control"/>
+										 </div>
+										 <div class="form-group">
+										           <label style="color: red;">*</label>  内容xpath:<input type="text" id="content" name="content" class="form-control"/>
+										 </div>
+										 <div class="form-group">
+										            作者xpath:<input type="text" id="author" name="author" class="form-control"/>
+										 </div>
+										 <div class="form-group">
+										            来源xpath:<input type="text" id="origin" name="origin" class="form-control"/>
+										 </div>
+										 <div class="form-group">
+										          <label style="color: red;">*</label> 发布时间xpath:<input type="text" id="publishTime" name="publishTime" class="form-control"/>
+										 </div>
+									</div>
+									<div class="form-group">
+										<div class="col-md-4">
+										    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+											<button type="button"  value="保 存"  class="btn" onclick="save()">保存</button>
+									    </div>
+									</div>
+									<br/>
+           						</form>
+        				   </div>
+				      </div><!-- /.modal-content -->
+				</div><!-- /.modal -->
+			</div>
+			<!--弹框开始-->
+               	  	 <div class="modal fade" id="zdyModal" tabindex="-1" role="dialog" aria-labelledby="zdyModalLabel" aria-hidden="true">
+					   <div class="modal-dialog">
+					      <div class="modal-content">
+					         <div class="modal-header">
+					            <button type="button" class="close" 
+					               data-dismiss="modal" aria-hidden="true">
+					                  &times;
+					            </button>
+           					    <h4 class="modal-title" id="zdyModalLabel">内容设置</h4>
+  							</div>
+        				   <div class="modal-body">
+           						<form role="form" name="addsForm" id="addsForm" method="post">
+           							<div class="container-fluid">
+           							    <div class="form-group">
+										    <label style="color: red;">*</label>名称：<input type="text" id="name" name="name" class="form-control"/>
+										    <input type="hidden" name="id"/>
+										    <input type="hidden" name="contentType" value="1"/>
+										</div>
+										<div class="form-group">
+										          所属站点：<select name="spiderSiteId" id ="spiderSiteId" class="form-control">
+										             <option th:each="site,iterStat:${siteDtos}"  th:value="${site.id}" th:text= "${site.name}"></option>
+										          </select>
+										</div>
+										<div class="form-group">
+										    <label style="color: red;">*</label>url匹配规则:<input type="text" id="url" name="url" class="form-control"/>
+										 </div>
+									</div>
+									<div class="form-group">
+										<div class="col-md-4">
+										    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+											<button type="button"  value="保 存"  class="btn" onclick="zdysave()">保存</button>
+									    </div>
+									</div>
+									<br/>
+           						</form>
+        				   </div>
+				      </div><!-- /.modal-content -->
+				</div><!-- /.modal -->
+			</div>
+               	  	
+   
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    
+	    <script type="text/javascript">
+	    /*<![CDATA[*/
+	    $(document).ready(function(){
+	    	initMenus();
+	    	var zTreeObj;
+	    	$("#listPage").load("./grid?pageNum=1&pageSize=5");
+	    	});
+	    
+	    
+	    function showEdit(configId,type)
+	    {	
+	    	var modalId = "myModal";
+	    	if(type=="1"){
+	    		modalId = "zdyModal";
+	    	}
+	    	$("#"+modalId).modal("toggle");
+	    	$.ajax({
+	    		url:"getOne.json",
+	    		type:"post",
+	    		data:"contentId="+configId,
+	    		success:function(data)
+	    		{
+	    			var formValue =  $("#"+modalId+" form").serializeArray();
+	            	 for(var num in formValue)
+	            		 {
+	            		 $("#"+modalId+" form [name='"+formValue[num].name+"']")[0].value = data.result[formValue[num].name];
+	            		 }
+	    		}
+	    	})
+	    }
+	    
+	    function addForm(type)
+	    {	
+	    	if(type=="0"){
+	    		$("#myModal form")[0].reset();
+	    		$("#myModal form [name='contentType'").val(type);
+	    	}else{
+	    		$("#zdyModal form")[0].reset();
+		    	$("#zdyModal form [name='contentType'").val(type);
+	    	}
+	    }
+	    
+	    function save()
+	    {
+	    	$.ajax({
+	    		url:"saveOrUpdate.json",
+	    		type:"post",
+	    		data:$("#myModal form").serialize(),
+	    	    success:function(data)
+	    	    {
+	    	    	alert(data.msg);
+	    	    	$("#myModal").modal("toggle");
+	    	    	$("#listPage").load("./grid?pageNum=1&pageSize=5");
+	    	    	$("#myModal form")[0].reset();
+	    	    }
+	    	})
+	    }
+	    function zdysave()
+	    {
+	    	$.ajax({
+	    		url:"saveOrUpdate.json",
+	    		type:"post",
+	    		data:$("#zdyModal form").serialize(),
+	    	    success:function(data)
+	    	    {
+	    	    	alert(data.msg);
+	    	    	$("#zdyModal").modal("toggle");
+	    	    	$("#listPage").load("./grid?pageNum=1&pageSize=5");
+	    	    	$("#zdyModal form")[0].reset();
+	    	    }
+	    	})
+	    }
+	    
+	    function deleteOne(id){
+	    	if(confirm("确定删除!"))
+	    	 $.ajax({
+	    		url:"delete.json",
+	    		type:"post",
+	    		data:"contentId="+id,
+	    	    success:function(data)
+	    	    {
+	    	    	alert(data.msg);
+	    	    	$("#listPage").load("./grid?pageNum=1&pageSize=5");
+	    	    }
+	    	})
+	    }
+	    function turnTo(num,pageSize)
+	    {
+	    	if(num==0)
+	    		{
+	    		alert("前面没有了");
+	    		return;
+	    		}
+	    	$("#listPage").load("./grid?pageNum="+num+"&pageSize="+pageSize);
+	    }
+/*field start*/
+	     function showFieldEdit(fieldId)
+	    {
+	    	$("#fieldModal").modal("toggle");
+	    	$.ajax({
+	    		url:"../field/getOne.json",
+	    		type:"post",
+	    		data:"fieldId="+fieldId,
+	    		success:function(data)
+	    		{
+	    			var formValue =  $("#fieldModal form").serializeArray();
+	            	 for(var num in formValue)
+	            		 {
+	            		 $("#fieldModal form [name='"+formValue[num].name+"']")[0].value = data.result[formValue[num].name];
+	            		 }
+	    		}
+	    	})
+	    }
+	    function addFieldForm(id)
+	    {
+	    	$("#fieldModal form")[0].reset();
+	    	$("#fieldModal form [name='id']").val('');
+	    	$("#formFieldChannelId").val(id);
+	    	
+	    }
+	    function saveField()
+	    {	var parentId = $("#parentId").val();
+	    	$.ajax({
+	    		url:"../field/saveOrUpdate.json",
+	    		type:"post",
+	    		data:$("#fieldModal form").serialize(),
+	    	    success:function(data)
+	    	    {
+	    	    	alert(data.msg);
+	    	    	$("#fieldModal").modal("toggle");
+	    	    	$("#listPage").load("../field/grid?pageNum=1&pageSize=5&spiderContentId="+parentId);
+	    	    	$("#fieldModal form")[0].reset();
+	    	    }
+	    	})
+	    }
+	    function deletefieldOne(id){
+	    	var parentId = $("#parentId").val();
+	    	if(confirm("确定删除!"))
+	    	 $.ajax({
+	    		url:"../field/delete.json",
+	    		type:"post",
+	    		data:"field="+id,
+	    	    success:function(data)
+	    	    {
+	    	    	alert(data.msg);
+	    	    	$("#listPage").load("../field/grid?pageNum=1&pageSize=5&spiderContentId="+parentId);
+	    	    }
+	    	})
+	    }
+	    function turnToField(num,pageSize,parentId)
+	    {
+	    	if(num==0)
+	    		{
+	    		alert("前面没有了");
+	    		return;
+	    		}
+	    	$("#listPage").load("../field/grid?pageNum="+num+"&pageSize="+pageSize+"&spiderContentId="+parentId);
+	    }
+	    /*]]>*/ 
+	    </script> 
+		
+</body>
+
+</html>
