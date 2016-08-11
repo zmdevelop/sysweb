@@ -149,9 +149,9 @@
            						<form role="form" name="addsForm" id="addsForm" method="post">
            							<div class="container-fluid">
            							    <div class="form-group">
-										    <label style="color: red;">*</label><label style="color: red;">*</label>字段名称：<input type="text" id="name" name="name" class="form-control"/>
+										    <label style="color: red;">*</label>字段名称：<input type="text" id="name" name="name" class="form-control"/>
 										    <input type="hidden" name="id"/>
-										    <input type="hidden" name="spiderChannelId" id="formFieldChannelId"/>
+										    <input type="hidden" name="spiderContentId" id="formFieldContentId"/>
 										    <input type="hidden" name="filterType" value="script"/>
 										    <input type="hidden" name="modelId"/>
 										</div>
@@ -397,7 +397,7 @@
 	    {
 	    	$("#fieldModal form")[0].reset();
 	    	$("#fieldModal form [name='id']").val('');
-	    	$("#formFieldChannelId").val(id);
+	    	$("#formFieldContentId").val(id);
 	    	
 	    }
 	    function saveField()
@@ -415,13 +415,13 @@
 	    	    }
 	    	})
 	    }
-	    function deletefieldOne(id){
+	    function deleteFieldOne(id){
 	    	var parentId = $("#parentId").val();
 	    	if(confirm("确定删除!"))
 	    	 $.ajax({
 	    		url:"../field/delete.json",
 	    		type:"post",
-	    		data:"field="+id,
+	    		data:"fieldId="+id,
 	    	    success:function(data)
 	    	    {
 	    	    	alert(data.msg);
