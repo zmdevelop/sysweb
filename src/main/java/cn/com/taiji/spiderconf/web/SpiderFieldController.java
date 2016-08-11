@@ -30,7 +30,8 @@ public class SpiderFieldController {
 		Pagination<SpiderFieldDto> page = fieldService.findByPage(pageSize,
 				pageNum, searchDto);
 		model.addAttribute("page", page);
-		model.addAttribute("channelId", searchDto.getSpiderChannelId());
+		String parentId = searchDto.getSpiderChannelId()==null?searchDto.getSpiderContentId():searchDto.getSpiderChannelId();
+		model.addAttribute("parentId", parentId);
 		return "spider/field/grid";
 	}
 

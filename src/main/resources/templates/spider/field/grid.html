@@ -12,7 +12,7 @@
 	<div class="panel-body">
 		<div class="form-group">
 			<button class="btn btn-default" data-toggle="modal"
-				data-target="#fieldModal" th:onclick="'javascript:addFieldForm(\''+ ${channelId} +'\')'">添加</button>
+				data-target="#fieldModal" th:onclick="'javascript:addFieldForm(\''+ ${parentId} +'\')'">添加</button>
 				<button class="btn btn-default"  onclick="turnTo('1','5');">返回列表页</button>
 		</div>
 		<div class="dataTable_wrapper">
@@ -35,13 +35,14 @@
 						<th>名称</th>
 						<th>xpath</th>
 						<th>字段所属</th>
+						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="config:${page.pageResult}">
 						<td th:text="${config.name}"></td>
 						<td th:text="${config.xpath}"></td>
-						<td th:text="${config.spiderChannelName}"></td>
+						<td th:text="${config.spiderChannelName}${config.spiderContentName}"></td>
 						<td>
 							<button class="btn btn-default"
 								th:onclick="'javascript:showFieldEdit(\''+ ${config.id} +'\')'">编辑</button>
