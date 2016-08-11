@@ -302,7 +302,7 @@
 	    		data:"contentId="+configId,
 	    		success:function(data)
 	    		{
-	    			var formValue =  $("#addsForm").serializeArray();
+	    			var formValue =  $("#"+modalId+" form").serializeArray();
 	            	 for(var num in formValue)
 	            		 {
 	            		 $("#"+modalId+" form [name='"+formValue[num].name+"']")[0].value = data.result[formValue[num].name];
