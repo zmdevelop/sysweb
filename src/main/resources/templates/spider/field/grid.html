@@ -42,7 +42,7 @@
 					<tr th:each="config:${page.pageResult}">
 						<td th:text="${config.name}"></td>
 						<td th:text="${config.xpath}"></td>
-						<td th:text="${config.spiderChannelName}${config.spiderContentName}"></td>
+						<td th:text="${config.spiderContentName}"></td>
 						<td>
 							<button class="btn btn-default"
 								th:onclick="'javascript:showFieldEdit(\''+ ${config.id} +'\')'">编辑</button>
