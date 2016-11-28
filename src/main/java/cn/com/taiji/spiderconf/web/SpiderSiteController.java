@@ -17,8 +17,12 @@ public class SpiderSiteController {
 	private SpiderSiteService siteService;
 
 	@RequestMapping("/list")
-	public String page(Model model) {
+	public String list(Model model) {
 		return "spider/site/list";
+	}
+	@RequestMapping("/page")
+	public String page(Model model) {
+		return "spider/site/page";
 	}
 
 	@RequestMapping("/getOne")

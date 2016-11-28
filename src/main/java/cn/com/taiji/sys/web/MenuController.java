@@ -1,6 +1,10 @@
 package cn.com.taiji.sys.web;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -16,15 +20,14 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hazelcast.util.StringUtil;
 
 import cn.com.taiji.security.SecurityUser;
-import cn.com.taiji.sys.domain.Menu;
-import cn.com.taiji.sys.domain.User;
 import cn.com.taiji.sys.dto.MenuDto;
 import cn.com.taiji.sys.dto.TreeDto;
 import cn.com.taiji.sys.service.MenuService;
+import cn.com.taiji.sys.util.UserUtil;
 
 /**
  * 描述:菜单controller
@@ -103,22 +106,64 @@ public class MenuController {
 	@RequestMapping("/getMenusByUser")
 	public String getMenusByRole(Model model)
 	{
-		SecurityUser user = getCurrentUserAccount();
+		SecurityUser user = UserUtil.getCurrentUserDto();
 		Set<MenuDto> menuDtos = menuService.findByUser(user.getUserId());
 		log.debug(menuDtos.size()+"");
 		model.addAttribute("menuDtos",menuDtos);
 		return "sys/menu-list";
 	}
 	
-	private SecurityUser getCurrentUserAccount() {
-        if (SecurityContextHolder.getContext().getAuthentication() == null)
-            return null;
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof SecurityUser) {
-            return (SecurityUser) principal;
-        }
-        return null;
-    }
-
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping("/loadMenus")
+	public @ResponseBody
+	Object loadMenus(Model model) {
+		try {
+			Comparator<MenuDto> c = new Comparator<MenuDto>() {
+				public int compare(MenuDto o1, MenuDto o2) {
+					return (int) ((o1.getMenuIndex() == null ? 0 : o1.getMenuIndex()) - (o2
+							.getMenuIndex() == null ? 0 : o2.getMenuIndex()));
+				}
+			};
+			SecurityUser user = UserUtil.getCurrentUserDto();
+			Set<MenuDto> menuDtos = menuService.findByUser(user.getUserId());
+			log.debug(menuDtos.size()+"");
+			List list = new ArrayList();
+			List<MenuDto> menuList = new ArrayList<MenuDto>();
+			for (MenuDto userMenu : menuDtos) {
+				menuList.add(userMenu);
+			}
+			Collections.sort(menuList, c);
+			for (MenuDto m : menuList) {
+				Map map = new HashMap();
+				map.put("id", m.getMenuId());
+				map.put("name", m.getMenuName());
+				if (m.getParentId() != null) {
+						map.put("pId", m.getParentId());
+				} else {
+					map.put("pId", 0);
+				}
+				map.put("icon", new String(m.getSmallIconPath()));
+				map.put("url", m.getMenuUrl());
+				if (m.getChildren().size() == 0) {
+					map.put("isLeaf", true);
+				} else {
+					map.put("isLeaf", false);
+				}
+				list.add(map);
+			}
+			model.addAttribute(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute(errorJson("异常"));
+		}
+		return "sys/menu-list";
+	}
+	public Map errorJson(final String msg) {
+        Map map = new HashMap() {{
+            put("status", 0);
+            put("msg", msg);
+        }};
+        return map;
+    }
 }

@@ -52,9 +52,9 @@ public class UserController {
 		String pagesize = request.getParameter("pagesize");
 		Pagination<UserDto> page = newPagination(currentPageStr, pagesize);
 		page = userService.findAllUser(pr, page);
-		model.addAttribute("userInfo", page.getPageResult());
-		model.addAttribute("pagevar", page);
-		log.info("用户维护列表加载成功！");
+		//model.addAttribute("userInfo", page.getPageResult());
+		model.addAttribute("page", page);
+		//log.info("用户维护列表加载成功！");
 		return "sys/user-list";
 	}
 	
